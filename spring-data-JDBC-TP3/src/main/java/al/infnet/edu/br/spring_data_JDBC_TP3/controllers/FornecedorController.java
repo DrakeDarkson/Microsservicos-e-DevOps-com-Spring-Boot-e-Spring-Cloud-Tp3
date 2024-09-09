@@ -26,6 +26,15 @@ public class FornecedorController {
         return fornecedorService.salvar(fornecedor);
     }
 
+    @PutMapping("/{id}")
+    public Fornecedor atualizarFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedor) {
+        if (!fornecedorRepository.existsById(id)) {
+            throw new RuntimeException("Fornecedor não encontrado");
+        }
+        fornecedor.setId(id);
+        return fornecedorService.salvar(fornecedor);
+    }
+
     @DeleteMapping("/{id}")
     public void deletarFornecedor(@PathVariable Long id) {
         fornecedorService.deletarPorId(id);
